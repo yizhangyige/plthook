@@ -1,0 +1,172 @@
+# PLTHook 项目配置文件
+# 定义各平台的构建参数和选项
+
+[project]
+name = "plthook"
+version = "1.2.0"
+description = "PLT Hook Library for Function Interception"
+author = "Kubo Takehiro"
+license = "BSD-2-Clause"
+
+[build]
+# 默认构建类型
+default_build_type = "Release"
+
+# 支持的平台
+supported_platforms = ["windows", "linux", "macos", "android"]
+
+# 支持的架构
+supported_architectures = {
+    windows = ["x86", "x64", "arm64"]
+    linux = ["x86_64", "arm64", "armv7"]
+    macos = ["x86_64", "arm64"]
+    android = ["arm64", "armv7", "x86_64"]
+}
+
+[compiler_flags]
+# 通用编译标志
+common_cflags = ["-Wall", "-Wextra"]
+common_cppflags = []
+
+# 平台特定标志
+[compiler_flags.windows]
+cflags = ["/W3", "/nologo"]
+cppflags = []
+ldflags = []
+
+[compiler_flags.linux]
+cflags = ["-fPIC", "-pthread"]
+cppflags = []
+ldflags = ["-Wl,--as-needed"]
+
+[compiler_flags.macos]
+cflags = ["-fPIC", "-Wno-deprecated-declarations"]
+cppflags = []
+ldflags = []
+
+[compiler_flags.android]
+cflags = ["-fPIC", "-fno-builtin-ceil"]
+cppflags = ["-frtti", "-fexceptions"]
+ldflags = []
+
+[dependencies]
+# 各平台的依赖库
+[dependencies.windows]
+libs = ["dbghelp"]
+
+[dependencies.linux]
+libs = ["dl", "m"]
+
+[dependencies.macos]
+libs = ["dl"]
+
+[dependencies.android]
+libs = ["dl", "m", "log"]
+
+[output]
+# 输出目录结构
+base_dir = "output"
+lib_subdir = "lib"
+bin_subdir = "bin"
+include_subdir = "include"
+
+# 文件扩展名
+[output.extensions]
+shared_lib = {
+    windows = "dll"
+    linux = "so"
+    macos = "dylib"
+    android = "so"
+}
+static_lib = {
+    windows = "lib"
+    linux = "a"
+    macos = "a"
+    android = "a"
+}
+executable = {
+    windows = "exe"
+    linux = ""
+    macos = ""
+    android = ""
+}
+
+[cmake]
+# CMake 特定配置
+minimum_version = "3.16"
+c_standard = "99"
+
+# 默认选项
+default_options = {
+    BUILD_SHARED_LIBS = "ON"
+    BUILD_TESTS = "ON"
+    CMAKE_BUILD_TYPE = "Release"
+}
+
+# 平台特定的 CMake 选项
+[cmake.windows]
+generator = "Visual Studio 16 2019"
+extra_options = {}
+
+[cmake.linux]
+generator = "Unix Makefiles"
+extra_options = {}
+
+[cmake.macos]
+generator = "Unix Makefiles"
+extra_options = {
+    CMAKE_OSX_DEPLOYMENT_TARGET = "10.15"
+}
+
+[cmake.android]
+generator = "Unix Makefiles"
+extra_options = {
+    ANDROID_PLATFORM = "android-21"
+    ANDROID_STL = "system"
+}
+
+[testing]
+# 测试配置
+test_modes = ["open", "open_by_handle", "open_by_address"]
+
+# 平台特定的测试配置
+[testing.windows]
+available_modes = ["open", "open_by_handle"]
+test_script = "run_tests_windows.bat"
+
+[testing.linux]
+available_modes = ["open", "open_by_handle", "open_by_address"]
+test_script = "run_tests.sh"
+
+[testing.macos]
+available_modes = ["open", "open_by_handle", "open_by_address"]
+test_script = "run_tests.sh"
+
+[testing.android]
+available_modes = ["open", "open_by_handle", "open_by_address"]
+test_script = "run_tests.sh"
+note = "open_by_address may fail on some Android versions"
+
+[packaging]
+# 打包配置
+include_files = [
+    "README.md",
+    "LICENSE",
+    "plthook.h",
+    "BUILD_GUIDE.md"
+]
+
+exclude_patterns = [
+    "*.o",
+    "*.obj",
+    "*.tmp",
+    ".git*",
+    "build/",
+    "*.log"
+]
+
+[documentation]
+# 文档配置
+build_guide = "BUILD_GUIDE.md"
+readme = "README.md"
+examples_dir = "examples"

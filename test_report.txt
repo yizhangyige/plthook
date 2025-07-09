@@ -1,0 +1,129 @@
+PLTHook Python 脚本测试报告
+==================================================
+
+测试时间: 2025-07-08 15:54:35
+总测试数: 57
+通过数: 43
+失败数: 14
+通过率: 75.4%
+
+详细结果:
+------------------------------
+[PASS] 导入 os
+      标准库可用
+[PASS] 导入 sys
+      标准库可用
+[PASS] 导入 subprocess
+      标准库可用
+[PASS] 导入 pathlib
+      标准库可用
+[PASS] 导入 argparse
+      标准库可用
+[PASS] 导入 shutil
+      标准库可用
+[PASS] 导入 platform
+      标准库可用
+[PASS] 导入 urllib
+      标准库可用
+[PASS] 导入 tarfile
+      标准库可用
+[PASS] 导入 time
+      标准库可用
+[PASS] Linux 构建脚本 (语法)
+      语法检查通过
+[FAIL] Linux 构建脚本 (导入)
+      导入错误: 
+[PASS] Linux 构建脚本 (-h)
+      帮助信息正常
+[PASS] Windows 构建脚本 (语法)
+      语法检查通过
+[FAIL] Windows 构建脚本 (导入)
+      导入错误: 
+[PASS] Windows 构建脚本 (-h)
+      帮助信息正常
+[PASS] Android 构建脚本 (语法)
+      语法检查通过
+[FAIL] Android 构建脚本 (导入)
+      导入错误: 
+[PASS] Android 构建脚本 (-h)
+      帮助信息正常
+[PASS] 综合构建脚本 (语法)
+      语法检查通过
+[FAIL] 综合构建脚本 (导入)
+      导入错误: 
+[PASS] 综合构建脚本 (-h)
+      帮助信息正常
+[PASS] build.py (清理)
+      清理功能正常
+[FAIL] build.py (平台检测)
+      平台检测失败: usage: build.py [-h] [--platform {windows,android,all}]
+                [--arch {x86,x64,arm64,arm64-v8a,armeabi-v7a,x86_64,all}]
+                [--ndk-path NDK_PATH] [--clean] [--no-test] [--deploy-android]
+build.py: error: argument --platform: invalid choice: 'auto' (choose from 'windows', 'android', 'all')
+
+[PASS] Android 测试脚本 (语法)
+      语法检查通过
+[FAIL] Android 测试脚本 (导入)
+      导入错误: 
+[PASS] Android 测试脚本 (-h)
+      帮助信息正常
+[PASS] Windows 测试脚本 (语法)
+      语法检查通过
+[FAIL] Windows 测试脚本 (导入)
+      导入错误: 
+[FAIL] Windows 测试脚本 (帮助)
+      帮助选项未正常工作
+[PASS] Visual Studio 测试脚本 (语法)
+      语法检查通过
+[FAIL] Visual Studio 测试脚本 (导入)
+      导入错误: 
+[PASS] Visual Studio 测试脚本 (-h)
+      帮助信息正常
+[PASS] uclibc 测试脚本 (语法)
+      语法检查通过
+[FAIL] uclibc 测试脚本 (导入)
+      导入错误: 
+[PASS] uclibc 测试脚本 (-h)
+      帮助信息正常
+[PASS] Android 设备测试脚本 (语法)
+      语法检查通过
+[FAIL] Android 设备测试脚本 (导入)
+      导入错误: 
+[FAIL] Android 设备测试脚本 (帮助)
+      帮助选项未正常工作
+[PASS] 内存监控构建脚本 (语法)
+      语法检查通过
+[FAIL] 内存监控构建脚本 (导入)
+      导入错误: 
+[PASS] 内存监控构建脚本 (-h)
+      帮助信息正常
+[PASS] 内存监控构建脚本 (清理)
+      清理功能正常
+[PASS] 内存监控构建脚本(增强版) (语法)
+      语法检查通过
+[FAIL] 内存监控构建脚本(增强版) (导入)
+      导入错误: 
+[PASS] 内存监控构建脚本(增强版) (-h)
+      帮助信息正常
+[PASS] 内存监控构建脚本(增强版) (清理)
+      清理功能正常
+[PASS] 路径处理: test/subdir/file.txt
+      路径处理正常
+[PASS] 路径处理: test\subdir\file.txt
+      路径处理正常
+[PASS] 路径处理: /absolute/path/file.txt
+      路径处理正常
+[PASS] 路径处理: C:\Windows\System32\file.txt
+      路径处理正常
+[PASS] build.py (错误处理)
+      正确处理无效参数
+[PASS] test_android.py (错误处理)
+      正确处理无效参数
+[PASS] test/run_test.py (错误处理)
+      正确处理无效参数
+[PASS] build.py (启动时间)
+      启动时间: 0.12s
+[PASS] test_android.py (启动时间)
+      启动时间: 0.12s
+[PASS] test/run_tests_windows.py (启动时间)
+      启动时间: 0.13s

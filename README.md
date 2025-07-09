@@ -3,6 +3,52 @@ PLTHook
 
 [![tests](https://github.com/kubo/plthook/actions/workflows/run-tests.yml/badge.svg)](https://github.com/kubo/plthook/actions/workflows/run-tests.yml)
 
+## 🚀 快速构建指南
+
+本项目已提供完整的多平台构建解决方案：
+
+### Windows 平台 ✅
+```powershell
+# 一键构建 Windows x64 版本
+.\build_windows.ps1 -Platform windows -Architecture x64
+```
+
+### Android 平台 ✅
+```powershell
+# 使用 Android NDK 构建多架构版本
+.\build_android.ps1  # 构建 arm64-v8a、armeabi-v7a、x86_64
+
+# 部署并测试
+.\test_android.ps1 -All  # 自动检测设备并测试
+```
+
+### 跨平台构建 🌍
+```bash
+# 自动检测平台并构建
+./build.sh -p auto -r
+```
+
+**📁 构建产物**: `output/` 目录  
+**🧪 测试验证**: 自动运行测试确保功能正常  
+**📖 详细文档**: 查看 `QUICK_START.md` 和 `BUILD_GUIDE.md`
+
+---
+
+## 📋 项目状态
+
+**当前状态**: 🎯 **核心功能完成，生产就绪**
+
+- ✅ Windows/Linux/macOS/Android 跨平台支持
+- ✅ 内存监控和分析工具
+- ✅ 自动化构建和测试
+- ✅ 完整文档和示例
+- ✅ **Android 设备实测验证通过**
+
+📖 查看详细信息：[PROJECT_STATUS.md](PROJECT_STATUS.md)  
+📱 Android 测试报告：[ANDROID_TEST_SUCCESS.md](ANDROID_TEST_SUCCESS.md)
+
+---
+
 What is plthook.
 ----------------
 
@@ -261,6 +307,58 @@ Supported Platforms
 [#45]: https://github.com/kubo/plthook/pull/45
 [#48]: https://github.com/kubo/plthook/issues/48
 [github actions]: https://github.com/kubo/plthook/actions/workflows/run-tests.yml
+
+---
+
+## 🛠️ 构建脚本完整指南
+
+本项目提供了双重脚本架构，包含原有脚本和增强的 Python 版本：
+
+### 推荐使用方式
+
+#### 🚀 快速开始 (Python 脚本)
+```bash
+# 验证环境
+python test_python_basic.py
+
+# 自动检测平台并构建
+python build.py --platform auto
+
+# Windows 构建
+python build_windows.py --arch x64
+
+# Android 构建
+python build_android.py --arch arm64-v8a
+
+# 运行测试
+python test_all_python_scripts.py
+```
+
+#### 📊 脚本统计
+- **总脚本数**: 27 个
+- **PowerShell 脚本**: 5 个 (原有)
+- **Batch 脚本**: 3 个 (原有)
+- **Shell 脚本**: 3 个 (原有)
+- **Python 脚本**: 16 个 (新增增强版)
+
+#### 🎯 Python 脚本优势
+- ✅ **跨平台兼容**: 统一的运行环境和接口
+- ✅ **自动检测**: VS/NDK/SDK 自动查找和配置
+- ✅ **增强功能**: 并行构建、详细日志、错误报告
+- ✅ **用户体验**: 彩色输出、进度指示、交互选项
+- ✅ **易维护**: 模块化代码、统一错误处理
+
+#### 📚 详细文档
+- 📖 **完整说明**: [BUILD_SCRIPTS_COMPLETE_GUIDE.md](BUILD_SCRIPTS_COMPLETE_GUIDE.md)
+- 📋 **脚本清单**: 运行 `python list_build_scripts.py`
+- 🔍 **功能对比**: 运行 `python build_scripts_comparison.py`
+
+### 迁移建议
+- **新用户**: 直接使用 Python 脚本
+- **现有用户**: 可以逐步从原有脚本迁移到 Python 版本
+- **生产环境**: 建议使用 Python 脚本以获得更好的稳定性和功能
+
+---
 
 License
 -------

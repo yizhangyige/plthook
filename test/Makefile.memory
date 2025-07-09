@@ -1,0 +1,57 @@
+# Memory Monitor Makefile for PLTHook
+
+CC = gcc
+CFLAGS = -Wall -Wextra -O2 -I..
+LDFLAGS = -ldl -lm
+
+# Platform detection
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Darwin)
+    PLTHOOK_SRC = ../plthook_osx.c
+    LDFLAGS = -ldl
+else ifeq ($(UNAME_S),Linux)
+    PLTHOOK_SRC = ../plthook_elf.c
+    LDFLAGS = -ldl -lm -lpthread
+else
+    $(error Unsupported platform: $(UNAME_S))
+endif
+
+# Windows specific settings (for MinGW)
+ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
+    PLTHOOK_SRC = ../plthook_win32.c
+    LDFLAGS = -ldbghelp -lpsapi
+    EXEEXT = .exe
+else
+    EXEEXT =
+endif
+
+TARGET = memory_monitor$(EXEEXT)
+
+all: $(TARGET)
+
+$(TARGET): memory_monitor.c $(PLTHOOK_SRC)
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+
+clean:
+	rm -f $(TARGET)
+
+install: $(TARGET)
+	cp $(TARGET) ../output/
+
+test: $(TARGET)
+	./$(TARGET) -t -r 30
+
+help:
+	@echo "Memory Monitor Build System"
+	@echo "============================"
+	@echo "Targets:"
+	@echo "  all       - Build memory monitor"
+	@echo "  clean     - Clean build artifacts"
+	@echo "  install   - Install to output directory"
+	@echo "  test      - Run test with 30 second timeout"
+	@echo "  help      - Show this help"
+	@echo ""
+	@echo "Platform: $(UNAME_S)"
+	@echo "PLTHook Source: $(PLTHOOK_SRC)"
+
+.PHONY: all clean install test help
