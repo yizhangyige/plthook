@@ -1,4 +1,6 @@
 *.obj
+dummy.c
+dummy.o
 libtest.dll
 libtest.exp
 libtest.lib
